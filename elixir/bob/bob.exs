@@ -1,34 +1,28 @@
 defmodule Bob do
   def hey(input) do
     cond do
-      sayNothing(input) -> "Fine. Be that way!"
-      isQuestion(input) -> "Sure."
-      isShouting(input) -> "Whoa, chill out!"
+      nothing?(input) -> "Fine. Be that way!"
+      question?(input) -> "Sure."
+      shouting?(input) -> "Whoa, chill out!"
       true -> "Whatever."
     end
   end
 
-  defp isShouting(input) do
-    isUpperCase =
-          input
-            |> String.upcase
-            |> (String.equivalent? input)
+  defp shouting?(input), do: upperCase?(input) && anyLetters?(input)
+  defp question?(input), do: String.ends_with?(input, "?")
+  defp anyLetters?(input), do: Regex.match?(~r/\p{L}+/, input)
 
-    isUpperCase && (anyLetters? input)
+  defp upperCase?(input) do
+        input
+          |> String.upcase
+          |> (String.equivalent? input)
   end
-
-  defp isQuestion(input) do
-    input
-      |> (String.ends_with? "?")
-  end
-
-  defp sayNothing(input) do
+  
+  defp nothing?(input) do
     input
       |> String.strip
       |> (String.equivalent? "")
   end
 
-  defp anyLetters?(input) do
-    Regex.match?(~r/\p{L}+/, input)
-  end
+
 end
