@@ -21,6 +21,9 @@ defmodule RunLengthEncoder do
 
   @spec decode(String.t) :: String.t
   def decode(string) do
-
+    Regex.replace(~r/(\d+)(\w)/, string,
+    fn _, count, val ->
+      String.duplicate(val, String.to_integer(count)) end)
   end
+
 end
