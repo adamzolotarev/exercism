@@ -19,8 +19,8 @@ defmodule ListOps do
     reverseIt({l, []})
   end
 
-  defp reverseIt({[],l}), do: l
-  defp reverseIt({[h|t], l}), do: reverseIt({t, List.insert_at(l, 0, h)})
+  defp reverseIt({[], l}), do: l
+  defp reverseIt({[h|t], l}), do: reverseIt({t, [h|l]})
 
 
   @spec map(list, (any -> any)) :: list
