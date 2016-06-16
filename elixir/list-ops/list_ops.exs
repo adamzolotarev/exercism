@@ -22,11 +22,15 @@ defmodule ListOps do
   defp reverseIt({[], l}), do: l
   defp reverseIt({[h|t], l}), do: reverseIt({t, [h|l]})
 
-
   @spec map(list, (any -> any)) :: list
   def map(l, f) do
-
+    mapIt(l, [], f)
+    |> reverse
   end
+
+  defp mapIt([], l, f), do: l
+  defp mapIt([h|t], l2, f), do: mapIt(t, [f.(h)|l2], f)
+
 
   @spec filter(list, (any -> as_boolean(term))) :: list
   def filter(l, f) do
