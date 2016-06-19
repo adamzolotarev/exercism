@@ -8,57 +8,70 @@ defmodule ListOps do
 
   @spec count(list) :: non_neg_integer
   def count(l) do
-    countIt({0, l})
+    _count({0, l})
   end
 
-  defp countIt({n,[]}), do: n
-  defp countIt({n,[h|t]}), do: countIt({n + 1, t})
+  defp _count({n,[]}), do: n
+  defp _count({n,[_|t]}), do: _count({n + 1, t})
 
   @spec reverse(list) :: list
   def reverse(l) do
-    reverseIt({l, []})
+    _reverse({l, []})
   end
 
-  defp reverseIt({[], l}), do: l
-  defp reverseIt({[h|t], l}), do: reverseIt({t, [h|l]})
+  defp _reverse({[], l}), do: l
+  defp _reverse({[h|t], l}), do: _reverse({t, [h|l]})
 
   @spec map(list, (any -> any)) :: list
   def map(l, f) do
-    mapIt(l, [], f)
+    _map(l, [], f)
     |> reverse
   end
 
-  defp mapIt([], l, f), do: l
-  defp mapIt([h|t], l2, f), do: mapIt(t, [f.(h)|l2], f)
+  defp _map([], l, _), do: l
+  defp _map([h|t], l2, f), do: _map(t, [f.(h)|l2], f)
 
 
   @spec filter(list, (any -> as_boolean(term))) :: list
   def filter(l, f) do
-    filterIt(l, [], f)
+    _filter(l, [], f)
     |> reverse
   end
 
-  defp filterIt([], l, f), do: l
-  defp filterIt([h|t], l, f) do
+  defp _filter([], l, _), do: l
+  defp _filter([h|t], l, f) do
     case f.(h) do
-      true -> filterIt(t, [h|l], f)
-      false -> filterIt(t, l, f)
+      true -> _filter(t, [h|l], f)
+      false -> _filter(t, l, f)
     end
   end
 
   @type acc :: any
   @spec reduce(list, acc, ((any, acc) -> acc)) :: acc
   def reduce(l, acc, f) do
-
+    _reduce(l, acc, f)
   end
+
+  defp _reduce([], acc, _), do: acc
+  defp _reduce([h|t], acc, func), do: _reduce(t, func.(h, acc), func)
 
   @spec append(list, list) :: list
   def append(a, b) do
-
+    reverse(a)
+    |> _append(b)
   end
+
+  defp _append([], l), do: l
+  defp _append(l, []), do: reverse(l)
+  defp _append([h|t], l) do
+    _append(t, [h|l])
+  end
+
 
   @spec concat([[any]]) :: [any]
   def concat(ll) do
-
+    reverse(ll)
+    |> reduce([], &(append(&1, &2)))
   end
+
 end
