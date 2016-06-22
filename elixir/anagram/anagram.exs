@@ -15,7 +15,7 @@ defmodule Anagram do
   end
 
   defp isAnagram?(a, a), do: false
-  defp isAnagram?(base = [h|t], word) do
+  defp isAnagram?(base, word) do
     cond do
       length(base) != length(word) -> false
       base -- word == [] -> true
