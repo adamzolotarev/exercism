@@ -15,19 +15,13 @@ defmodule Anagram do
     word |> String.downcase |> String.graphemes
   end
 
-  def isAnagram?(a, a), do: false
-  def isAnagram?(a, b), do: _isAnagram?(a, b)
-
-  defp _isAnagram?([], []), do: true
-  defp _isAnagram?(base = [h|t], word) do
+  defp isAnagram?(a, a), do: false
+  defp isAnagram?(base = [h|t], word) do
     cond do
       length(base) != length(word) -> false
-      Enum.member?(word, h) -> _isAnagram?(t, wordWithoutLetter(word, h))
+      base -- word == [] -> true
       true -> false
     end
   end
 
-  defp wordWithoutLetter(word, letter) do
-    List.delete(word, letter)
-  end
 end
