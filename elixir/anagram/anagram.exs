@@ -4,7 +4,6 @@ defmodule Anagram do
   """
   @spec match(String.t, [String.t]) :: [String.t]
 
-  def match(_, []), do: []
   def match(base, words) do
     base = String.downcase(base)
     Enum.filter(words, fn(word) ->
