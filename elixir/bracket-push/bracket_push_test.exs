@@ -56,7 +56,7 @@ defmodule BracketPushTest do
   test "should ignore non-bracket characters" do
     assert BracketPush.check_brackets("{}c")
   end
-  
+
   @tag :pending
   test "should ignore non-bracket characters" do
     assert BracketPush.check_brackets("{hello[]([a()])b}c")
