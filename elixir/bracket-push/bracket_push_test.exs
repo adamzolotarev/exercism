@@ -18,41 +18,45 @@ defmodule BracketPushTest do
     assert BracketPush.check_brackets("{}")
   end
 
-  @tag :pending
+  # @tag :pending
   test "unclosed brackets" do
     refute BracketPush.check_brackets("{{")
   end
 
-  @tag :pending
+  # @tag :pending
   test "more than one pair of brackets" do
     assert BracketPush.check_brackets("{}[]")
   end
 
-  @tag :pending
+  # @tag :pending
   test "brackets are out of order" do
     refute BracketPush.check_brackets("}{")
   end
 
-  @tag :pending
+  #@tag :pending
   test "nested brackets" do
     assert BracketPush.check_brackets("{[()]}")
   end
 
-  @tag :pending
+ # @tag :pending
   test "unbalanced nested brackets" do
     refute BracketPush.check_brackets("{[}]")
   end
 
-  @tag :pending
+  # @tag :pending
   test "bracket closure with deeper nesting" do
     refute BracketPush.check_brackets("{[)][]}")
   end
 
-  @tag :pending
+  # @tag :pending
   test "bracket closure in a long string of brackets" do
     assert BracketPush.check_brackets("{[]([()])}")
   end
 
+  test "should ignore non-bracket characters" do
+    assert BracketPush.check_brackets("{}c")
+  end
+  
   @tag :pending
   test "should ignore non-bracket characters" do
     assert BracketPush.check_brackets("{hello[]([a()])b}c")
