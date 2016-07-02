@@ -17,19 +17,12 @@ defmodule DNA do
   def count(strand, nucleotide) do
     validNucleotides? = Enum.all?([nucleotide | strand], &isNucleotide?/1)
     case validNucleotides? do
-      true -> _count(strand, nucleotide)
+      true -> Enum.count(strand, &(&1 == nucleotide))
       false ->  raise ArgumentError
     end
   end
-
-  defp _count(strand, nucleotide) do
-    strand    
-    |> Enum.filter(fn(l) -> l == nucleotide end)
-    |> length
-  end
-
-  defp validNucleotides, do: [?A, ?G, ?T, ?C]
-  defp isNucleotide?(candidate), do: Enum.member?(validNucleotides, candidate)
+  
+  defp isNucleotide?(candidate), do: Enum.member?(@nucleotides, candidate)
 
   @doc """
   Returns a summary of counts by nucleotide.
@@ -41,6 +34,6 @@ defmodule DNA do
   """
   @spec histogram([char]) :: map
   def histogram(strand) do
-    %{?A => count(strand, ?A), ?T => count(strand, ?T), ?C => count(strand, ?C), ?G => count(strand, ?G)}
+    Map.new(@nucleotides, &({&1, count(strand, &1)}))    
   end  
 end
