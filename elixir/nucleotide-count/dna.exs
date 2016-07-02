@@ -15,11 +15,8 @@ defmodule DNA do
   @spec count([char], char) :: non_neg_integer
 
   def count(strand, nucleotide) do
-    validNucleotides? = Enum.all?([nucleotide | strand], &isNucleotide?/1)
-    case validNucleotides? do
-      true -> Enum.count(strand, &(&1 == nucleotide))
-      false ->  raise ArgumentError
-    end
+    unless Enum.all?([nucleotide | strand], &isNucleotide?/1), do: raise ArgumentError
+    Enum.count(strand, &(&1 == nucleotide)) 
   end
   
   defp isNucleotide?(candidate), do: Enum.member?(@nucleotides, candidate)
