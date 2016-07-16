@@ -101,8 +101,6 @@ defmodule Phone do
   end
 
   defp to_ptetty(number) do
-    "(" <> String.slice(number, 0, 3) <> ") "
-     <> String.slice(number, 3, 3) <> "-"
-     <> String.slice(number, 6, 4)
+    "(#{String.slice(number, 0..2)}) #{String.slice(number, 3..5)}-#{String.slice(number, 6..9)}"
   end
 end
