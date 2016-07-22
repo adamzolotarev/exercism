@@ -1,5 +1,5 @@
 if !System.get_env("EXERCISM_TEST_EXAMPLES") do
-  Code.load_file("beer-song/beer_song.exs")
+  Code.load_file("beer_song.exs")
 end
 
 ExUnit.start
@@ -56,7 +56,7 @@ Go to the store and buy some more, 99 bottles of beer on the wall.
     """
   end
 
-  @tag :pending
+  # @tag :pending
   test "getting the whole song" do
     assert BeerSong.lyrics == """
 99 bottles of beer on the wall, 99 bottles of beer.
