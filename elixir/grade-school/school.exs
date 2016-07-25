@@ -11,7 +11,10 @@ defmodule School do
   @spec add(map, String.t, integer) :: map
   def add(db, name, grade) do
     original = db[grade]
-    updated = [original|name] |> Enum.sort
+    case original == nil do
+      true -> updated = [name]
+      false -> updated = [name | original] |> Enum.sort
+    end
     Map.put(db, grade, updated)
   end
 
@@ -20,7 +23,7 @@ defmodule School do
   """
   @spec grade(map, integer) :: [String.t]
   def grade(db, grade) do
-
+    db[grade]
   end
 
   @doc """
