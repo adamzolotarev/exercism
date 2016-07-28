@@ -23,7 +23,11 @@ defmodule School do
   """
   @spec grade(map, integer) :: [String.t]
   def grade(db, grade) do
-    db[grade]
+    g = db[grade]
+    case g == nil do
+      true -> []
+      false -> g
+    end
   end
 
   @doc """
@@ -31,6 +35,6 @@ defmodule School do
   """
   @spec sort(map) :: [{integer, [String.t]}]
   def sort(db) do
-
+    Enum.sort(db) 
   end
 end
