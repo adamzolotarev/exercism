@@ -11,14 +11,10 @@ defmodule Year do
   @spec leap_year?(non_neg_integer) :: boolean
   def leap_year?(year) do
     cond do
-      divisible_by_400?(year) -> true
-      divisible_by_100?(year) -> false
-      divisible_by_4?(year) -> true
+      rem(year, 400) == 0 -> true
+      rem(year, 100) == 0-> false
+      rem(year, 4) == 0 -> true
       true -> false
     end
   end
-
-  defp divisible_by_4?(year), do: rem(year, 2) == 0
-  defp divisible_by_100?(year), do: rem(year, 100) == 0
-  defp divisible_by_400?(year), do: rem(year, 400) == 0
 end
