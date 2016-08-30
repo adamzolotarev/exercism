@@ -20,9 +20,42 @@ defmodule Meetup do
   #
   # end
   def meetup(year, month, weekday, :teenth) do
-     13..20
+     find_date(13..20, year, month, weekday)
+     |> List.first()
+  end
+
+  def meetup(year, month, weekday, :first) do
+    findDaysInMonth(year, month, weekday)
+    |> List.first()
+  end
+
+
+  def meetup(year, month, weekday, :second) do
+     findDaysInMonth(year, month, weekday)
+     |> Enum.at(1)
+  end
+  def meetup(year, month, weekday, :third) do
+     findDaysInMonth(year, month, weekday)
+     |> Enum.at(2)
+  end
+  def meetup(year, month, weekday, :fourth) do
+     findDaysInMonth(year, month, weekday)
+     |> Enum.at(3)
+  end
+  def meetup(year, month, weekday, :last) do
+     findDaysInMonth(year, month, weekday)
+     |> List.last()
+  end
+
+  defp findDaysInMonth(year, month, weekday) do
+    1..:calendar.last_day_of_the_month(year, month)
+    |> find_date(year, month, weekday)
+  end
+
+  defp find_date(day_range, year, month, weekday) do
+     day_range
      |> Enum.map(fn(day) -> {year, month, day} end)
-     |> Enum.find(fn(date) -> is_weekday?(date, weekday) end)
+     |> Enum.filter(fn(date) -> is_weekday?(date, weekday) end)
   end
 
   defp is_weekday?(date, weekday) do
@@ -39,5 +72,6 @@ defmodule Meetup do
       :sunday     -> 7
     end
   end
+
 
 end
