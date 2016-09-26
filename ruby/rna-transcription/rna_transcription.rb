@@ -15,9 +15,7 @@ module Complement
   end
 
   def valid?(dna_strand)
-    is_valid = true
-    dna_strand.each_char { |c| is_valid &&= @dna_to_rna_map.key?(c) }
-    is_valid
+    dna_strand.split('').all? { |c| @dna_to_rna_map.key?(c) }
   end
 end
 
