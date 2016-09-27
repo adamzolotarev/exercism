@@ -8,10 +8,7 @@ module Complement
 
   def of_dna(dna_strand)
     return '' unless valid? dna_strand
-
-    rna = ''
-    dna_strand.each_char { |c| rna += @dna_to_rna_map[c] }
-    rna
+    dna_strand.tr(@dna_to_rna_map.keys.join, @dna_to_rna_map.values.join)
   end
 
   def valid?(dna_strand)
