@@ -1,25 +1,18 @@
 class Squares
-  @square_of_sum
-  @sum_of_squares
-  @difference
-
-  attr_reader:square_of_sum
-  attr_reader:sum_of_squares
-  attr_reader:difference
-
   def initialize(number)
-    calculate_square_of_sum(number)
-    calculate_sum_of_squares(number)
-    @difference = @square_of_sum - @sum_of_squares
-
+    @number = number
   end
 
-  def calculate_sum_of_squares(number)
-    @sum_of_squares = (0..number).reduce(0){|sum, num| sum + num**2 }
+  def sum_of_squares
+    (0..@number).reduce(0){|sum, num| sum + num**2 }
   end
 
-  def calculate_square_of_sum(number)
-    @square_of_sum = ((0..number).reduce(:+))**2
+  def square_of_sum
+    ((0..@number).reduce(:+))**2
+  end
+
+  def difference
+    square_of_sum - sum_of_squares
   end
 end
 
