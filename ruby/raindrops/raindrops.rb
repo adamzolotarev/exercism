@@ -1,13 +1,11 @@
 module Raindrops
 	def convert(number)
-		drop = ''
+    drop = ''
 		drop = 'Pling' if number % 3 == 0
 		drop += 'Plang' if number % 5 == 0
 		drop += 'Plong' if number % 7 == 0
 
-		return number.to_s if drop == ''
-
-		drop
+    drop.empty? ? number.to_s : drop
 	end
 end
 
