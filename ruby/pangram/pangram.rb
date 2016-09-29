@@ -1,10 +1,10 @@
 # Learning Ruby
 class Pangram
-  @alphabet = 'abcdefghigklmnopqrstuvwxyz'
+  @alphabet = ('a'..'z')
 
   def self.is_pangram?(str)
     downcased = str.downcase
-    @alphabet.chars.all? {|char| downcased.include?(char) }
+    @alphabet.all? {|char| downcased.include?(char) }
   end
 end
 
