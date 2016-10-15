@@ -20,6 +20,8 @@ class Prime
       (candidate % prime).nonzero?
     end
   end
+
+  private_class_method :prime?
 end
 
 module BookKeeping
