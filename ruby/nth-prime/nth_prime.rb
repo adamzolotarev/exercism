@@ -1,17 +1,24 @@
 class Prime
-  def self.nth(n)
-    Sieve.nth_prime(n)
-  end
-end
+  @primes ||= [2, 3, 5]
 
-module Sieve
-  def self.nth_prime(n)
-    up_to = n * (Math.log(n) + 2)
-    primes = (2..up_to).to_a
-    primes.each do |k|
-      primes.reject! { |p| (p % k).zero? && p != k }
+  def self.nth(n)
+    raise ArgumentError if n < 1
+    candidate = @primes.last + 2
+
+    while @primes.length < n
+      @primes << candidate if prime?(candidate)
+      candidate += 2
     end
-    primes[n - 1]
+
+    @primes[n - 1]
+  end
+
+  def self.prime?(candidate)
+    root = Math.sqrt(candidate)
+    @primes.all? do |prime|
+      return true if prime > root
+      (candidate % prime).nonzero?
+    end
   end
 end
 

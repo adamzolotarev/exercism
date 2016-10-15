@@ -18,12 +18,26 @@ class NthPrimeTest < Minitest::Test
     assert_equal 3, Prime.nth(2)
   end
 
+  def test_fourth_prime
+    # skip
+    assert_equal 7, Prime.nth(4)
+  end
+
+  def test_fifth_prime
+    # skip
+    assert_equal 11, Prime.nth(5)
+  end
+
   def test_sixth_prime
     # skip
     assert_equal 13, Prime.nth(6)
   end
 
   def test_big_prime
+    # skip
+    assert_equal 104743, Prime.nth(10001)
+  end
+  def test_second_big_prime
     # skip
     assert_equal 104743, Prime.nth(10001)
   end
