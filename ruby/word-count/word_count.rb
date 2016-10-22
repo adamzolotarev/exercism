@@ -1,10 +1,7 @@
 class Phrase
   def initialize(words)
-    @word_count = words.gsub(/[^a-zA-Z|'| |\n|,|\w]/, '')
-                       .tr(',', ' ')
-                       .downcase
-                       .split
-                       .map { |w| w.chomp("'").reverse.chomp("'").reverse }
+    @word_count = words.downcase
+                       .scan(/\w+'\w+|\w+/)
                        .reduce(Hash.new(0)) { |a, e| a.update(e => a[e] + 1) }
   end
 
