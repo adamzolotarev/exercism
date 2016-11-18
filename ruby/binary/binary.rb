@@ -5,11 +5,11 @@ class Binary
   end
 
   def to_decimal
-    binary_array = @binary.to_s.chars.map(&:to_i)
+    bits = @binary.to_s.chars.map(&:to_i)
     total = 0
 
-    binary_array.each_with_index do |n, i|
-      total += 2**(binary_array.length - i - 1) * n
+    bits.each_with_index do |n, i|
+      total += 2**(bits.length - i - 1) * n
     end
     total
   end
@@ -17,7 +17,7 @@ class Binary
   private
 
   def valid_binary?(binary)
-    binary.chars.all? { |c| c == '0' || c == '1' }
+    binary.each_char.all? { |c| c == '0' || c == '1' }
   end
 end
 
