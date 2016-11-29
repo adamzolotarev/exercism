@@ -1,16 +1,10 @@
 class SumOfMultiples
 
   def initialize(*args)
-    @divisibles = args
+    @multiples = args
   end
 
   def to(max)
-    (1..max - 1).inject(0) { |acc, elem| divisible?(elem) ? acc + elem : sum }
-  end
-
-  private
-
-  def divisible?(number)
-    @divisibles.any? { |e| (number % e).zero? }
+    (0...max).select { |n| @multiples.any? { |b| (n % b).zero? } }.reduce(&:+)
   end
 end
