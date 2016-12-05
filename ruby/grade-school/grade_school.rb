@@ -5,7 +5,7 @@ class School
 
   def students(grade)
     students_in_grade = @students[grade] || []
-    students_in_grade.sort!
+    students_in_grade.sort
   end
 
   def add(name, grade)
@@ -15,9 +15,9 @@ class School
 
   def students_by_grade
     return [] if @students.empty?
-    @students.each_key
-             .map { |key| { grade: key, students: students(key) } }
-             .sort_by { |hash| hash[:grade] }
+    @students.keys.sort.collect do |grade|
+      { grade: grade, students: students(grade) }
+    end
   end
 end
 
