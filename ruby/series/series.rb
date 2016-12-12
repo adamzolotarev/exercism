@@ -1,19 +1,14 @@
 class Series
 
-  def  initialize(string)
-    @chars = string
+  def initialize(digits)
+    @digits = digits
   end
 
   def slices(slice_size)
-    raise ArgumentError if slice_size > @chars.length
-    i = 0
-    result = []
-    while (i + slice_size) <= @chars.length
-      slice = @chars.slice(i, slice_size)
-      result << slice.split('').to_a.map(&:to_i)
-      i += 1
-    end
+    raise ArgumentError if slice_size > @digits.length
 
-    result
+    (0..@digits.length - slice_size).map do |index|
+      @digits[index, slice_size].chars.map(&:to_i)
+    end
   end
 end
