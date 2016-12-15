@@ -70,19 +70,19 @@ class PhoneNumberTest < Minitest::Test
   end
 
   def test_different_area_code
-    skip
+    # skip
     number = PhoneNumber.new('9876543210')
     assert_equal '987', number.area_code
   end
 
   def test_pretty_print
-    skip
+    # skip
     number = PhoneNumber.new('5551234567')
     assert_equal '(555) 123-4567', number.to_s
   end
 
   def test_pretty_print_with_full_us_phone_number
-    skip
+    # skip
     number = PhoneNumber.new('11234567890')
     assert_equal '(123) 456-7890', number.to_s
   end
