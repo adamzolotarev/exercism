@@ -5,12 +5,9 @@ class BeerSong
   end
 
   def verses(verse_number_high_bound, verse_number_low_bound)
-    lyrics = ''
-    verse_number_high_bound.downto(verse_number_low_bound).each do |verse_number|
-      lyrics += verse(verse_number)
-      lyrics += "\n" if verse_number != verse_number_low_bound
-    end
-    lyrics
+    verse_number_high_bound.downto(verse_number_low_bound)
+                           .map { |verse_number| verse(verse_number) }
+                           .join("\n")
   end
 
   def lyrics
