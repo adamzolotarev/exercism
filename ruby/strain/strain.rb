@@ -5,9 +5,7 @@ class Array
     new_array
   end
 
-  def discard
-    new_array = []
-    each { |element| new_array.push(element) unless yield(element) }
-    new_array
+  def discard(&block)
+    self - keep(&block)
   end
 end
