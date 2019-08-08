@@ -30,8 +30,8 @@ class Clock
   end
 
   def minutes_format
-    minutes = @minutes % 60
-    clock_format(minutes)
+    remaining_minutes = @minutes % 60
+    clock_format(remaining_minutes)
   end
 
   def clock_format(time)
